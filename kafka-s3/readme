@@ -1,0 +1,27 @@
+Flume agent using a kafka source to consume messages from a kafka topic "POC-test".  Stores the messages in S3 bucket
+
+PreReq:
+start zookeeper on localhost:2181
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+start a kafka on localhost:9092
+$ bin/kafka-server-start.sh config/server.properties
+create a topic "POC-test"
+$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic POC-test
+start kafka console producer and send some messages
+$ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+To run:
+~/apps/apache-flume-1.7.0-bin/bin/flume-ng agent --conf ~/apps/apache-flume-1.7.0-bin/conf --conf-file kafka-hdfs.conf --name a1 -Dflume.root.logger=DEBUG,console
+
+Result:
+kafka messages are consumed by flume source and stored in AWS s3 bucket
+
+note:
+any issues running flume script regarding:
+Caused by: java.lang.ClassNotFoundException: org.apache.hadoop.io.SequenceFile$CompressionType
+
+configure your flume-env.sh to explicitly add the jar file, in this case adding:
+
+FLUME_CLASSPATH="/usr/local/hadoop/share/hadoop/common/hadoop-common-2.6.0.jar"
+
+

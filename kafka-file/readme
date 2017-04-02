@@ -1,0 +1,15 @@
+
+Flume agent using a kafka source to consume messages from a kafka topic in batches every 5 seconds.  Uses a file in /tmp as a sink
+
+PreReq:
+start zookeeper on localhost:2181
+start a kafka on localhost:9092
+create a topic "POC-test"
+start kafka console producer and send some messages
+
+To run:
+~/apps/apache-flume-1.7.0-bin/bin/flume-ng agent --conf conf --conf-file basicKafkaToFile.conf --name a1
+
+Result:
+kafka messages are consumed by flume source and stored on the local filesystem in /tmp
+

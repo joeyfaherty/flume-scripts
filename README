@@ -1,3 +1,10 @@
-Various flume sinks, channels, sources and interceptors defined at the page below:
+Kafka source, local file sink
+Kafka source, hdfs sink
+Kafka source, s3 sink
+netcat source, local file sink
+netcat source, console logger sink 
 
+
+
+Various flume sinks, channels, sources and interceptors defined at the page below:
 https://flume.apache.org/FlumeUserGuide.html
